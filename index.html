@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>数字存储与显示</title>
+</head>
+<body>
+  <h1>请输入一串数字：</h1>
+  <form action="save.php" method="POST">
+    <input type="text" name="number" placeholder="输入数字">
+    <input type="submit" value="提交">
+  </form>
+  
+  <h2>存储的数字：</h2>
+  <p id="storedNumber"></p>
+  
+  <script>
+    document.getElementById('storedNumber').textContent = '已存储数字：' + localStorage.getItem('storedNumber');
+  </script>
+  
+  <h2>显示存储的数字：</h2>
+  <p id="displayNumber"></p>
+  
+  <script>
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('admin')) {
+      $.get("load.php", function(data) {
+        document.getElementById('displayNumber').textContent = '存储的数字：' + data;
+      });
+    }
+  </script>
+</body>
+</html>
